@@ -13,13 +13,12 @@ function sleep(milliseconds) {
   } while (currentDate - date < milliseconds);
 }
 
-// Show Loading
-function loading() {
+function showLoading() {
   loader.hidden = false;
   quoteContainer.hidden = true;
 }
 
-function complete() {
+function hideLoading() {
   quoteContainer.hidden = false;
   loader.hidden = true;
 }
@@ -29,7 +28,7 @@ let apiQuotes = [];
 // Show New Quote
 
 function newQuote() {
-  loading();
+  showLoading();
   // Pick a random quote from apiQuotes array
 
   const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
@@ -50,12 +49,12 @@ function newQuote() {
     quoteText.classList.remove("long-quote");
   }
   quoteText.textContent = quote.text;
-  complete();
+  hideLoading();
 }
 
 // Get Quotes From API
 async function getQuotes() {
-  loading();
+  showLoading();
   const apiUrl = "https://type.fit/api/quotes";
   try {
     const response = await fetch(apiUrl);
